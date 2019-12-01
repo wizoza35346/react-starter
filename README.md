@@ -1,14 +1,11 @@
 # empty-project
 
-Empty project.
+Empty React project.
 
 ## Building and running on localhost
 
 First install dependencies:
 
-```sh
-npm install -g parcel-bundler
-```
 ```sh
 npm install
 ```
@@ -32,4 +29,3 @@ Open the file `dist/index.html` in your browser
 ## Credits
 
 Made with [createapp.dev](https://createapp.dev/)
-
