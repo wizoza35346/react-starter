@@ -10,7 +10,7 @@ function useForm(props) {
 
   useEffect(() => {
     for (const fieldName in fields.current) {
-      if (!fields.current[fieldName].touched) break;
+      if (!fields.current[fieldName].touched) continue;
 
       const error = fields.current[fieldName].validate(inputs[fieldName]);
       if (error && !(fieldName in errors))
@@ -33,18 +33,21 @@ function useForm(props) {
   }, [rerender, inputs]);
 
   const handleSubmit = event => {
+    console.log(event);
     if (event) {
       event.preventDefault();
     }
   };
-  const handleInputChange = useCallback(event => {
-    // console.log(event.target);
+
+  const handleInputChange = useCallback((event, options, name) => {
     event.persist();
-    const name = event.target.name;
     fields.current[name].touched = true;
+    // fabric-ui => Textfield => value ; ComboBox => Optons,index,undefined
+    // Html5 => event.target.value
+    const value = options[0];
     setInputs(inputs => ({
       ...inputs,
-      [name]: event.target.value
+      [name]: (value && (value.key || value)) || event.target.value
     }));
   }, []);
 
@@ -74,18 +77,26 @@ function useForm(props) {
     }));
   };
 
-  const fieldInit = (name, validation) => ({
+  const fieldInit = (name, validation, valueName) => ({
     name,
-    value: inputs[name],
+    [valueName || 'value']: inputs[name] || '',
     ref: useCallback(instance => register(instance, validation), []),
-    onChange: handleInputChange,
-    onFocus: useCallback(() => (fields.current[name].touched = true), []),
+    onChange: useCallback(
+      (event, ...options) => handleInputChange(event, options, name),
+      []
+    ),
+    onFocus: useCallback(() => {
+      fields.current[name] && (fields.current[name].touched = true);
+    }, []),
     onBlur: useCallback(() => {
       if (fields.current[name].touched) render();
     }, [])
   });
 
   const getFieldName = el => {
+    // Custom Component => props
+    // Html5 => name
+
     if (el.props) return el.props.name;
     return el.name;
   };

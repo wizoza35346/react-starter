@@ -1,42 +1,75 @@
-import React, { useMemo, useEffect, useState, useCallback } from 'react';
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+  useState,
+  useCallback
+} from 'react';
 import { hot } from 'react-hot-loader/root';
-import Hooks from './hooks-test';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import {
+  ComboBox,
+  SelectableOptionMenuItemType,
+  TextField
+} from 'office-ui-fabric-react';
 import useForm from './hooks/useForm';
 
-function App({ name }) {
-  console.log('redering...');
-  // const [state, setState] = useState([]);
-  const { errors, fields, fieldInit } = useForm({});
+function App() {
+  const [comboOptions] = useState([
+    {
+      key: 'Header1',
+      text: 'First heading',
+      itemType: SelectableOptionMenuItemType.Header
+    },
+    { key: 'A', text: 'Option A' },
+    { key: 'B', text: 'Option B' },
+    { key: 'C', text: 'Option C' },
+    { key: 'D', text: 'Option D' },
+    {
+      key: 'divider',
+      text: '-',
+      itemType: SelectableOptionMenuItemType.Divider
+    },
+    {
+      key: 'Header2',
+      text: 'Second heading',
+      itemType: SelectableOptionMenuItemType.Header
+    },
+    { key: 'E', text: 'Option E' },
+    { key: 'F', text: 'Option F', disabled: true },
+    { key: 'G', text: 'Option G' },
+    { key: 'H', text: 'Option H' },
+    { key: 'I', text: 'Option I' },
+    { key: 'J', text: 'Option J' }
+  ]);
+  const { errors, fields, fieldInit, inputs } = useForm({});
 
-  console.log(fields);
+  console.log(inputs);
 
   return (
     <>
-      <div>{name}</div>
-      <Hooks
-        label="Username"
-        {...fieldInit('username1')}
-        errorMessage={errors.username1 && errors.username1.msg}
-      ></Hooks>
       <div>
-        <TextField
+        <ComboBox
           label="Username"
-          {...fieldInit('username')}
+          options={comboOptions}
+          {...fieldInit('username', 'required', 'selectedKey')}
           errorMessage={errors.username && errors.username.msg}
-        ></TextField>
+        ></ComboBox>
+
+        <select {...fieldInit('username', 'required')}>
+          {comboOptions.map(option => (
+            <option key={option.key} value={option.key}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+
         <TextField
           label="Username"
           {...fieldInit('username1', 'required')}
           errorMessage={errors.username1 && errors.username1.msg}
         ></TextField>
-        {/* <input
-          name="username1"
-          value={inputs['username1']}
-          onChange={handleInputChange}
-          onBlur={handleInputChange}
-          ref={instance => register(instance)}
-        /> */}
+        <input {...fieldInit('username1', 'required')} />
+        {errors.username1 && <span>{errors.username1.msg}</span>}
       </div>
       <button type="submit">Submit</button>
     </>

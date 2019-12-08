@@ -2,5 +2,8 @@ import 'core-js/es/promise';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
+import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 
-ReactDOM.render(<App name="Ryan" />, document.getElementById('app'));
+initializeIcons(/* optional base url */);
+
+ReactDOM.render(<App />, document.getElementById('app'));
