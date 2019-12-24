@@ -8,13 +8,13 @@
   "license": "ISC",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "build": "webpack -p --mode production",
-    "start": "webpack-dev-server --hot --mode development"
+    "build": "rimraf dist & cross-env NODE_ENV=production webpack -p --mode production",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --mode development"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.6",
+    "antd": "^3.26.4",
     "core-js": "^3.4.7",
-    "office-ui-fabric-react": "^7.69.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.18",
@@ -22,15 +22,23 @@
     "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
-    "babel-loader": "^8.0.6",
-    "file-loader": "^5.0.2",
-    "@hot-loader/react-dom": "^16.11.0",
     "@babel/core": "^7.7.5",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
+    "@hot-loader/react-dom": "^16.11.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.13.0",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "rimraf": "^3.0.0",
+    "style-loader": "^1.1.1",
+    "terser-webpack-plugin": "^2.3.1",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
