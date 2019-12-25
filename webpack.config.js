@@ -55,9 +55,10 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: require('html-webpack-template'),
-      inject: false,
-      appMountId: 'app'
+      //template: require('html-webpack-template'),
+      //inject: false,
+      appMountId: 'app',
+      template: './public/index.html'
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
