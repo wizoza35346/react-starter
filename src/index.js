@@ -1,9 +1,7 @@
-import 'core-js/es/promise';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import App from './app';
-// import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 
-// initializeIcons(/* optional base url */);
+import 'bootstrap/scss/bootstrap.scss';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));

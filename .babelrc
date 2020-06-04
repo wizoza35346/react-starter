@@ -3,21 +3,13 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ],
     "@babel/preset-react"
   ],
   "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": "css"
-      }
-    ],
-    "react-hot-loader/babel",
-    "@babel/plugin-transform-runtime"
+    "react-hot-loader/babel"
   ]
 }
