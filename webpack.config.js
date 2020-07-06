@@ -1,15 +1,8 @@
 var path = require('path');
-<<<<<<< HEAD
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-=======
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
->>>>>>> e1fd39e1b973b78b9184b6414fb16a418a8a10a5
 
 const DEV_MODE = process.env.NODE_ENV !== 'production';
 const IS_HASH = DEV_MODE ? '' : '.[contenthash]';
@@ -67,11 +60,7 @@ module.exports = {
     }),
   ],
   optimization: {
-<<<<<<< HEAD
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-=======
     minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
->>>>>>> e1fd39e1b973b78b9184b6414fb16a418a8a10a5
     runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
