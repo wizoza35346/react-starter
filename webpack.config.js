@@ -1,6 +1,8 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const DEV_MODE = process.env.NODE_ENV !== 'production';
 const IS_HASH = DEV_MODE ? '' : '.[contenthash]';
@@ -58,6 +60,7 @@ module.exports = {
     }),
   ],
   optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
